@@ -163,7 +163,7 @@ function App() {
             }}
         >
             <div className={`container ${theme}`}>
-                <h1>Habit Tracker</h1>
+                <h1>REACT - TASKBOARD</h1>
                 <ThemeToggle />
 
                 <HabitForm
