@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import HabitForm from "./components/HabitForm";
 import HabitList from "./components/HabitList";
+import HabitStats from "./components/HabitStats";
 
 function App() {
 
@@ -64,8 +65,31 @@ function App() {
             .includes(search.toLowerCase())
     );
 
+    const totalHabits = habits.length;
 
+    const completedHabits = habits.filter(
+        (habit) => habit.completed
+    ).length;
 
+    const pendingHabits =
+        totalHabits - completedHabits;
+
+    const completionRate =
+        totalHabits === 0
+            ? 100
+            : (completedHabits / totalHabits) * 100;
+
+    const categoryCounts = habits.reduce(
+        (counts, habit) => {
+
+            counts[habit.category] =
+                (counts[habit.category] || 0) + 1;
+
+            return counts;
+        },
+        {}
+    );
+    console.log(categoryCounts);
     return (
         <div>
             <h1>Habit Tracker</h1>
@@ -77,6 +101,14 @@ function App() {
                 category={category}
                 setCategory={setCategory}
             />
+            <HabitStats
+                totalHabits={totalHabits}
+                completedHabits={completedHabits}
+                pendingHabits={pendingHabits}
+                completionRate={completionRate}
+                categoryCounts={categoryCounts}
+            />
+
             <input
                 type="text"
                 placeholder="Search habits..."
@@ -101,6 +133,8 @@ function App() {
                 deleteHabit={delHabit}
                 toggleHabit={toggleHabit}
             />
+
+
         </div>
     )
 }
