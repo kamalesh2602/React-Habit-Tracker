@@ -1,4 +1,7 @@
 import { useState } from "react";
+import HabitForm from "./components/HabitForm";
+import HabitList from "./components/HabitList";
+
 function App() {
     const [habits, setHabits] = useState([]);
     const [habitName, setHabitName] = useState("")
@@ -14,34 +17,23 @@ function App() {
     const delHabit = (id) => {
         setHabits(habits.filter((habit) => habit.id !== id))
     }
+    
     return (
-        <div>
-            <h1>Habit Tracker</h1>
+    <div>
+        <h1>Habit Tracker</h1>
 
-            <input
-                type="text"
-                placeholder="Enter Habit"
-                value={habitName}
-                onChange={(e) => setHabitName(e.target.value)}
-            />
-            <button onClick={addHabit}>
-                Add Habit
-            </button>
-            <ul>
-                {habits.map((habit) => (
-                    <li key={habit.id}>
-                        {habit.name}
-                        <button onClick={() => delHabit(habit.id)}>
-                            Delete
-                        </button>
-                    </li>
+        <HabitForm
+            habitName={habitName}
+            setHabitName={setHabitName}
+            addHabit={addHabit}
+        />
 
-                ))}
-            </ul>
-
-
-        </div>
-    )
+        <HabitList
+            habits={habits}
+            deleteHabit={delHabit}
+        />
+    </div>
+)
 }
 
 export default App;
