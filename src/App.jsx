@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import HabitForm from "./components/HabitForm";
 import HabitList from "./components/HabitList";
 import HabitStats from "./components/HabitStats";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
     const [category, setCategory] = useState("Health")
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [theme, setTheme] = useState("light");
 
     useEffect(() => {
         localStorage.setItem("habits", JSON.stringify(habits))
@@ -91,8 +93,12 @@ function App() {
     );
     console.log(categoryCounts);
     return (
-        <div>
+        <div className={`container ${theme}`}>
             <h1>Habit Tracker</h1>
+            <ThemeToggle
+    theme={theme}
+    setTheme={setTheme}
+/>
 
             <HabitForm
                 habitName={habitName}
@@ -132,6 +138,7 @@ function App() {
                 habits={filteredHabits}
                 deleteHabit={delHabit}
                 toggleHabit={toggleHabit}
+                theme={theme}
             />
 
 
