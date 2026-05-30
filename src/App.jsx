@@ -10,7 +10,7 @@ function App() {
         if (habitName.trim() === "") {
             return;
         }
-        setHabits([...habits, { id: Date.now(), name: habitName }]);
+        setHabits([...habits, { id: Date.now(), name: habitName, completed : false}]);
         setHabitName("");
     }
 
@@ -18,6 +18,24 @@ function App() {
         setHabits(habits.filter((habit) => habit.id !== id))
     }
     
+    const toggleHabit = (id) => {
+    setHabits(
+        habits.map((habit) => {
+
+            if (habit.id === id) {
+                return {
+                    ...habit,
+                    completed: !habit.completed
+                };
+            }
+
+            return habit;
+        })
+    );
+};
+
+
+ 
     return (
     <div>
         <h1>Habit Tracker</h1>
@@ -31,6 +49,7 @@ function App() {
         <HabitList
             habits={habits}
             deleteHabit={delHabit}
+            toggleHabit={toggleHabit}
         />
     </div>
 )
