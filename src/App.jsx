@@ -5,6 +5,7 @@ import HabitStats from "./components/HabitStats";
 import ThemeToggle from "./components/ThemeToggle";
 import ThemeContext from "./context/ThemeContext";
 import useLocalStorage from "./hooks/useLocalStorage";
+import { useRef } from "react";
 
 function App() {
 
@@ -14,9 +15,7 @@ function App() {
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [theme, setTheme] = useLocalStorage("theme", "light");
-
- 
-
+    const searchRef = useRef(null);
 
     const addHabit = () => {
         if (habitName.trim() === "") {
@@ -85,6 +84,31 @@ function App() {
         {}
     );
     console.log(categoryCounts);
+
+    const handleKeyDown = (e) => {
+
+    if (e.ctrlKey && e.key === "/") {
+        e.preventDefault();
+
+        searchRef.current.focus();
+    }
+
+};
+useEffect(() => {
+
+    window.addEventListener(
+        "keydown",
+        handleKeyDown
+    );
+
+    return () => {
+        window.removeEventListener(
+            "keydown",
+            handleKeyDown
+        );
+    };
+
+}, []);
     return (
         <ThemeContext.Provider
         value={{
@@ -113,6 +137,7 @@ function App() {
 
             <input
                 type="text"
+                ref={searchRef}
                 placeholder="Search habits..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
