@@ -17,7 +17,8 @@ function App() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [theme, setTheme] = useLocalStorage("theme", "light");
     const searchRef = useRef(null);
-
+    const [editingId, setEditingId] = useState(null);
+    const [editText, setEditText] = useState("");
     const addHabit = () => {
         if (habitName.trim() === "") {
             return;
@@ -88,83 +89,108 @@ function App() {
 
     const handleKeyDown = (e) => {
 
-    if (e.ctrlKey && e.key === "/") {
-        e.preventDefault();
+        if (e.ctrlKey && e.key === "/") {
+            e.preventDefault();
 
-        searchRef.current.focus();
-    }
+            searchRef.current.focus();
+        }
 
-};
-useEffect(() => {
+    };
+    useEffect(() => {
 
-    window.addEventListener(
-        "keydown",
-        handleKeyDown
-    );
-
-    return () => {
-        window.removeEventListener(
+        window.addEventListener(
             "keydown",
             handleKeyDown
         );
-    };
 
-}, []);
+        return () => {
+            window.removeEventListener(
+                "keydown",
+                handleKeyDown
+            );
+        };
+
+    }, []);
+
+    const saveHabit = () => {
+
+    setHabits(
+        habits.map((habit) => {
+
+            if (habit.id === editingId) {
+                return {
+                    ...habit,
+                    name: editText
+                };
+            }
+
+            return habit;
+        })
+    );
+
+    setEditingId(null);
+    setEditText("");
+};
     return (
         <ThemeContext.Provider
-        value={{
-            theme,
-            setTheme
-        }}
-    >
-        <div className={`container ${theme}`}>
-            <h1>Habit Tracker</h1>
-            <ThemeToggle/>
+            value={{
+                theme,
+                setTheme
+            }}
+        >
+            <div className={`container ${theme}`}>
+                <h1>Habit Tracker</h1>
+                <ThemeToggle />
 
-            <HabitForm
-                habitName={habitName}
-                setHabitName={setHabitName}
-                addHabit={addHabit}
-                category={category}
-                setCategory={setCategory}
-            />
-            <HabitStats
-                totalHabits={totalHabits}
-                completedHabits={completedHabits}
-                pendingHabits={pendingHabits}
-                completionRate={completionRate}
-                categoryCounts={categoryCounts}
-            />
+                <HabitForm
+                    habitName={habitName}
+                    setHabitName={setHabitName}
+                    addHabit={addHabit}
+                    category={category}
+                    setCategory={setCategory}
+                />
+                <HabitStats
+                    totalHabits={totalHabits}
+                    completedHabits={completedHabits}
+                    pendingHabits={pendingHabits}
+                    completionRate={completionRate}
+                    categoryCounts={categoryCounts}
+                />
 
-            <input
-                type="text"
-                ref={searchRef} 
-                placeholder="Search habits..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-            <select
-                value={selectedCategory}
-                onChange={(e) =>
-                    setSelectedCategory(e.target.value)
-                }
-            >
-                <option value="All">All</option>
-                <option value="Health">Health</option>
-                <option value="Coding">Coding</option>
-                <option value="Learning">Learning</option>
-                <option value="Personal">Personal</option>
-            </select>
+                <input
+                    type="text"
+                    ref={searchRef}
+                    placeholder="Search habits..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <select
+                    value={selectedCategory}
+                    onChange={(e) =>
+                        setSelectedCategory(e.target.value)
+                    }
+                >
+                    <option value="All">All</option>
+                    <option value="Health">Health</option>
+                    <option value="Coding">Coding</option>
+                    <option value="Learning">Learning</option>
+                    <option value="Personal">Personal</option>
+                </select>
 
-            <HabitList
-                habits={filteredHabits}
-                deleteHabit={delHabit}
-                toggleHabit={toggleHabit}
-                
-            />
+                <HabitList
+                    habits={filteredHabits}
+                    deleteHabit={delHabit}
+                    toggleHabit={toggleHabit}
+                    editingId={editingId}
+                    setEditingId={setEditingId}
+                    editText={editText}
+                    setEditText={setEditText}
+                    saveHabit={saveHabit}
 
-        <QuoteOfDay/>
-        </div>
+                />
+
+                <QuoteOfDay />
+            </div>
         </ThemeContext.Provider>
     )
 }

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
 
-function HabitList({ habits, deleteHabit, toggleHabit }) {
+function HabitList({ habits, deleteHabit, toggleHabit, editingId, setEditingId, editText, setEditText, saveHabit }) {
     const { theme } = useContext(ThemeContext);
     return (
         <ul>
@@ -16,16 +16,40 @@ function HabitList({ habits, deleteHabit, toggleHabit }) {
                             checked={habit.completed}
                             onChange={() => toggleHabit(habit.id)}
                         />
-                        <span
-                            style={{
-                                textDecoration: habit.completed
-                                    ? "line-through"
-                                    : "none"
+                        {
+                            habit.id === editingId ? (
+                                <>
+                                    <input
+                                        value={editText}
+                                        onChange={(e) =>
+                                            setEditText(e.target.value)
+                                        }
+                                    />
+                                    <button onClick={saveHabit}>
+                                        Save
+                                    </button>
+                                </>
+
+                            ) : (
+                                <span
+                                    style={{
+                                        textDecoration: habit.completed
+                                            ? "line-through"
+                                            : "none"
+                                    }}
+                                >
+                                    {habit.name}
+                                </span>
+                            )
+                        }
+                        <button
+                            onClick={() => {
+                                setEditingId(habit.id);
+                                setEditText(habit.name);
                             }}
                         >
-                            {habit.name}
-                        </span>
-
+                            Edit
+                        </button>
                         <button
                             onClick={() => deleteHabit(habit.id)}
                         >
