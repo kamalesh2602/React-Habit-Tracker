@@ -6,6 +6,7 @@ import ThemeToggle from "./components/ThemeToggle";
 import ThemeContext from "./context/ThemeContext";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useRef } from "react";
+import QuoteOfDay from "./components/QuoteOfDay";
 
 function App() {
 
@@ -137,7 +138,7 @@ useEffect(() => {
 
             <input
                 type="text"
-                ref={searchRef}
+                ref={searchRef} 
                 placeholder="Search habits..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -162,7 +163,7 @@ useEffect(() => {
                 
             />
 
-
+        <QuoteOfDay/>
         </div>
         </ThemeContext.Provider>
     )
