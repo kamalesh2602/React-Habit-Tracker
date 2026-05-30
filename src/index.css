@@ -1,82 +1,337 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: Inter, Arial, sans-serif;
+    background-color: #f4f6f8;
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
 }
 
 h1 {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+h3 {
+    margin-top: 25px;
 }
 
 input,
 select {
-    padding: 8px;
+    padding: 10px 12px;
     margin: 5px;
+    border-radius: 8px;
+    border: 1px solid #d0d7de;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: #4f46e5;
 }
 
 button {
-    padding: 8px 12px;
+    padding: 10px 14px;
     margin-left: 5px;
-    cursor: pointer;
-}
-
-.habit-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 10px;
-    margin: 10px 0;
-
-    background: white;
+    border: none;
     border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
 }
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+ul {
+    padding: 0;
+}
+
 .habit-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    list-style: none;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 12px;
+    transition: all 0.2s ease;
 }
+
+.habit-item > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .habit-item button {
-    margin-left: 10px;
+    margin-left: 0;
 }
 
 small {
-    color: gray;
     margin-left: 8px;
 }
 
-.container.light {
-    background-color: white;
-    color: black;
+/* ---------- STATS ---------- */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 25px 0;
 }
 
-.container.dark {
-    background-color: #1e1e1e;
+.stats-card {
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.stats-card h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.stats-card p {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* ---------- CATEGORY PILLS ---------- */
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-pill {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ---------- LIGHT MODE ---------- */
+
+.container.light {
+    background-color: white;
+    color: #1f2937;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.habit-item.light {
+    background-color: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+.habit-item.light:hover {
+    background-color: #eef2ff;
+}
+
+.stats-card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+.category-pill {
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+.container.light button {
+    background-color: #4f46e5;
     color: white;
 }
-.habit-item.light {
+
+.container.light button:hover {
+    background-color: #4338ca;
+}
+
+.container.light input,
+.container.light select {
     background-color: white;
+    color: #111827;
+}
+
+/* ---------- DARK MODE ---------- */
+
+.container.dark {
+    background-color: #111827;
+    color: #f9fafb;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .habit-item.dark {
-    background-color: #2d2d2d;
+    background-color: #1f2937;
+    border: 1px solid #374151;
+}
+
+.habit-item.dark:hover {
+    background-color: #2a3548;
+}
+
+.container.dark .stats-card {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+}
+
+.container.dark .category-pill {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    color: #c7d2fe;
 }
 
 .container.dark input,
 .container.dark select {
-    background-color: #3a3a3a;
+    background-color: #1f2937;
     color: white;
-    border: 1px solid #555;
+    border: 1px solid #374151;
+}
+
+.container.dark input:focus,
+.container.dark select:focus {
+    border-color: #818cf8;
 }
 
 .container.dark button {
-    background-color: #444;
+    background-color: #4f46e5;
     color: white;
-    border: 1px solid #666;
+}
+
+.container.dark button:hover {
+    background-color: #6366f1;
+}
+
+.container.dark small {
+    color: #9ca3af;
+}
+input[type="text"] {
+    min-width: 250px;
+}
+.habit-item > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.quote-card {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+}
+.stats-grid {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   HABIT LIST IMPROVEMENTS
+   ========================= */
+
+.habit-item {
+    padding: 16px 20px;
+}
+
+.habit-item span {
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.habit-item input[type="checkbox"] {
+    transform: scale(1.1);
+}
+
+/* Push buttons slightly away from text */
+
+.habit-item button {
+    min-width: 70px;
+}
+
+/* =========================
+   SEARCH SECTION
+   ========================= */
+
+input[type="text"] {
+    width: 250px;
+}
+
+/* =========================
+   QUOTE CARD
+   ========================= */
+
+.quote-box {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.container.light .quote-box {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+.container.dark .quote-box {
+    background: #1f2937;
+    border: 1px solid #374151;
+}
+
+.quote-box h3 {
+    margin-top: 0;
+}
+
+/* =========================
+   STATS SPACING
+   ========================= */
+
+.stats-grid {
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   CATEGORY PILLS
+   ========================= */
+
+.category-list {
+    margin-bottom: 20px;
+}
+
+/* =========================
+   BETTER SECTION SPACING
+   ========================= */
+
+h3 {
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   BUTTON CONSISTENCY
+   ========================= */
+
+button {
+    font-size: 13px;
+}
+
+/* =========================
+   FORM ROW
+   ========================= */
+
+.container > button,
+.container > input,
+.container > select {
+    vertical-align: middle;
+}
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

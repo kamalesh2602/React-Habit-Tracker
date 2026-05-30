@@ -45,7 +45,7 @@ function QuoteOfDay() {
 
 
     return (
-        <div>
+        <div className="quote-box">
             <h3>Quote of the Day</h3>
             <p>{quote}</p>
             <button onClick={fetchData}>
