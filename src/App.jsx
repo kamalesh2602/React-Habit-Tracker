@@ -29,10 +29,12 @@ function App() {
         }
         setHabits([...habits, { id: Date.now(), name: habitName, completed: false, category: category }]);
         setHabitName("");
+        setMessage("Habit Added");
     }
 
     const delHabit = (id) => {
         setHabits(habits.filter((habit) => habit.id !== id))
+        setMessage("Habit Deleted");
     }
 
     const toggleHabit = (id) => {
@@ -136,7 +138,23 @@ function App() {
 
         setEditingId(null);
         setEditText("");
+        setMessage("Habit Updated");
     };
+
+    useEffect(() => {
+
+        if (!message) return;
+
+        const timer = setTimeout(() => {
+            setMessage("");
+        }, 3000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+
+    }, [message]);
+
     return (
         <ThemeContext.Provider
             value={{
@@ -155,6 +173,13 @@ function App() {
                     category={category}
                     setCategory={setCategory}
                 />
+                {
+                    message && (
+                        <div className="toast">
+                            {message}
+                        </div>
+                    )
+                }
                 <HabitStats
                     totalHabits={totalHabits}
                     completedHabits={completedHabits}
