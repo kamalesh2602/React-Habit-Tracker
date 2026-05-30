@@ -4,26 +4,18 @@ import HabitList from "./components/HabitList";
 import HabitStats from "./components/HabitStats";
 import ThemeToggle from "./components/ThemeToggle";
 import ThemeContext from "./context/ThemeContext";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
 
-    const [habits, setHabits] = useState(() => {
-        const storedHabits = localStorage.getItem("habits");
-
-        return storedHabits
-            ? JSON.parse(storedHabits)
-            : [];
-    });
+    const [habits, setHabits] = useLocalStorage("habits", []);
     const [habitName, setHabitName] = useState("")
     const [category, setCategory] = useState("Health")
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useLocalStorage("theme", "light");
 
-    useEffect(() => {
-        localStorage.setItem("habits", JSON.stringify(habits))
-    }, [habits])
-
+ 
 
 
     const addHabit = () => {
