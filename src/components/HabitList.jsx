@@ -1,6 +1,11 @@
 //destructured props
 
-function HabitList({ habits, deleteHabit, toggleHabit, theme }) {
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
+
+
+function HabitList({ habits, deleteHabit, toggleHabit }) {
+    const { theme } = useContext(ThemeContext);
     return (
         <ul>
             {habits.map((habit) => (

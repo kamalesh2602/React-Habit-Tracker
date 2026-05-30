@@ -3,6 +3,7 @@ import HabitForm from "./components/HabitForm";
 import HabitList from "./components/HabitList";
 import HabitStats from "./components/HabitStats";
 import ThemeToggle from "./components/ThemeToggle";
+import ThemeContext from "./context/ThemeContext";
 
 function App() {
 
@@ -93,12 +94,15 @@ function App() {
     );
     console.log(categoryCounts);
     return (
+        <ThemeContext.Provider
+        value={{
+            theme,
+            setTheme
+        }}
+    >
         <div className={`container ${theme}`}>
             <h1>Habit Tracker</h1>
-            <ThemeToggle
-    theme={theme}
-    setTheme={setTheme}
-/>
+            <ThemeToggle/>
 
             <HabitForm
                 habitName={habitName}
@@ -138,11 +142,12 @@ function App() {
                 habits={filteredHabits}
                 deleteHabit={delHabit}
                 toggleHabit={toggleHabit}
-                theme={theme}
+                
             />
 
 
         </div>
+        </ThemeContext.Provider>
     )
 }
 
