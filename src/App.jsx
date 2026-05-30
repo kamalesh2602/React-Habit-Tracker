@@ -7,6 +7,7 @@ import ThemeContext from "./context/ThemeContext";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useRef } from "react";
 import QuoteOfDay from "./components/QuoteOfDay";
+import useDebounce from "./hooks/useDebounce";
 
 function App() {
 
@@ -19,6 +20,9 @@ function App() {
     const searchRef = useRef(null);
     const [editingId, setEditingId] = useState(null);
     const [editText, setEditText] = useState("");
+    const debouncedSearch = useDebounce(search, 500);
+    const [message, setMessage] = useState("");
+
     const addHabit = () => {
         if (habitName.trim() === "") {
             return;
@@ -58,8 +62,10 @@ function App() {
     const filteredHabits = categoryFilteredHabits.filter((habit) =>
         habit.name
             .toLowerCase()
-            .includes(search.toLowerCase())
+            .includes(debouncedSearch.toLowerCase())
     );
+    console.log("search:", search);
+    console.log("debounced:", debouncedSearch);
 
     const totalHabits = habits.length;
 
@@ -114,23 +120,23 @@ function App() {
 
     const saveHabit = () => {
 
-    setHabits(
-        habits.map((habit) => {
+        setHabits(
+            habits.map((habit) => {
 
-            if (habit.id === editingId) {
-                return {
-                    ...habit,
-                    name: editText
-                };
-            }
+                if (habit.id === editingId) {
+                    return {
+                        ...habit,
+                        name: editText
+                    };
+                }
 
-            return habit;
-        })
-    );
+                return habit;
+            })
+        );
 
-    setEditingId(null);
-    setEditText("");
-};
+        setEditingId(null);
+        setEditText("");
+    };
     return (
         <ThemeContext.Provider
             value={{
