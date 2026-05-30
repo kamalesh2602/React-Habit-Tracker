@@ -1,16 +1,144 @@
-# React + Vite
+# Habit Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based Habit Tracker application built to learn React fundamentals through a practical project.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Add new habits
+* Delete habits
+* Mark habits as completed
+* Edit existing habits
+* Search habits
+* Filter habits by category
+* Habit statistics dashboard
+* Dark/Light theme toggle
+* Data persistence using Local Storage
+* Keyboard shortcut for search focus (`Ctrl + /`)
+* Quote of the Day feature using a public API
+* Toast notifications for user actions
+* Debounced search using a custom hook
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## React Concepts Covered
 
-## Expanding the ESLint configuration
+### Core React
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Components
+* Props
+* State (`useState`)
+* Event Handling
+* Conditional Rendering
+* Lists and Keys
+
+### React Hooks
+
+* `useState`
+* `useEffect`
+* `useContext`
+* `useRef`
+
+### Context API
+
+* Creating Context
+* Providing Context
+* Consuming Context with `useContext`
+
+### Custom Hooks
+
+* `useLocalStorage`
+* `useDebounce`
+
+### State Management Concepts
+
+* Lifting State Up
+* Controlled Components
+* Derived State
+* CRUD Operations
+
+### Browser APIs
+
+* Local Storage
+* Keyboard Events
+* Event Listeners
+
+### API Integration
+
+* Fetch API
+* Async/Await
+* Loading State
+* Error Handling
+
+### React Patterns
+
+* Component Composition
+* Conditional Rendering
+* Side Effects with `useEffect`
+* Cleanup Functions
+
+---
+
+## Project Structure
+
+```text
+src/
+├── components/
+├── context/
+├── hooks/
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## Concepts Not Covered Yet
+
+### React Router
+
+* BrowserRouter
+* Routes
+* Route
+* Link
+* Navigation
+* Route Parameters
+
+### Advanced React
+
+* useMemo
+* useCallback
+* React.memo
+* Lazy Loading
+* Suspense
+* Error Boundaries
+
+### State Management Libraries
+
+* Redux Toolkit
+* Zustand
+
+### Testing
+
+* React Testing Library
+* Jest
+
+### Forms
+
+* React Hook Form
+* Form Validation Libraries
+
+### Data Fetching Libraries
+
+* TanStack Query (React Query)
+* SWR
+
+### Advanced Patterns
+
+* Custom Context Providers
+* Compound Components
+* Render Props
+
+---
+
+## Learning Outcome
+
+This project covers the React fundamentals required to build small and medium-sized applications, including component-based architecture, state management, API integration, custom hooks, Context API, and CRUD functionality.
